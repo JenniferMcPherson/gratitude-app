@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
+import VideoPlayer from '../../components/VideoPlayer';
 import { getProductById } from '../../utils/mockApi';
 
 export default function ProductDetail() {
@@ -26,9 +27,10 @@ export default function ProductDetail() {
         <p>{product.description}</p>
         <p>Price: ${product.price}</p>
         <p>Origin: {product.origin}</p>
-        <button onClick={() => {/* Add to cart logic */}}>Add to Cart</button>
+        <VideoPlayer videoUrl={product.videoUrl} />
         <h2>Artisan Story</h2>
         <p>{product.artisanStory}</p>
+        <button onClick={() => {/* Add to cart logic */}}>Add to Cart</button>
       </div>
     </Layout>
   );
