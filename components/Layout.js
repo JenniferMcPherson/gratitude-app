@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import '../styles/globals.css';
 
 export default function Layout({ children }) {
   return (
@@ -9,7 +10,7 @@ export default function Layout({ children }) {
         <Link href="/products"><a>Products</a></Link>
         <Link href="/about"><a>About</a></Link>
       </nav>
-      <main>{children}</main>
+      <main className="container">{children}</main>
       <footer>© 2024 Gratitude App</footer>
     </div>
   );
