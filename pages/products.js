@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
-
-const sampleProducts = [
-  { name: "Handmade Scarf", description: "Beautiful scarf made by artisans in Peru", price: 49.99, origin: "Peru" },
-  { name: "Carved Wooden Box", description: "Intricate wooden box crafted in India", price: 79.99, origin: "India" },
-];
+import { getProducts } from '../utils/mockApi';
 
 export default function Products() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProducts().then(data => {
+      setProducts(data);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return <Layout><p>Loading products...</p></Layout>;
+  }
+
   return (
     <Layout>
       <h1>Our Products</h1>
       <p>Explore our collection of personalized gifts from around the world.</p>
       <div className="product-list">
-        {sampleProducts.map((product, index) => (
-          <ProductCard key={index} {...product} />
+        {products.map((product) => (
+          <ProductCard key={product.id} {...product} />
         ))}
       </div>
     </Layout>
